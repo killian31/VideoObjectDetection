@@ -7,7 +7,7 @@ This project implements the Owl-ViT model for zero-shot object detection in vide
 Table of contents:
 - [Installation](#installation)
 - [Usage](#usage)
-- [Exemple](#exemple)
+- [Example](#example)
 
 ## Installation
 
