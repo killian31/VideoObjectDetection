@@ -214,7 +214,7 @@ if __name__ == "__main__":
     parser.add_argument('--save_to', type=str, required=True,
                         help='the directory in which to save the processed images')
     parser.add_argument('--fps', type=int, default=None,
-                        help='Number of frames per second for the output video (default: None, determined automatically if process_video).')
+                        help='Number of frames per second for the output video (default: None, determined automatically if --process_video).')
     parser.add_argument('--process_video', action='store_true', default=False,
                         help="Wether to get images from a video or not (default: False).")
     parser.add_argument('--video_filename', type=str, default=None,

@@ -30,6 +30,7 @@ Options:
   -h, --help            show this help message and exit
   --imgs_dir IMGS_DIR   The directory containing the images.
   --save_to SAVE_TO     the directory in which to save the processed images
+  --fps FPS             Number of frames per second for the output video (default: None, determined automatically if --process_video).
   --process_video       Wether to get images from a video or not (default: False).
   --video_filename VIDEO_FILENAME
                         Name of video file to process (default: None).
