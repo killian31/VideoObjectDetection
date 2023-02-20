@@ -140,8 +140,8 @@ class Detector:
         directory = f'{save_to}_plots'
         if not os.path.exists(directory):
             os.makedirs(directory)
-
-        for label, count in self.detection_count.items():
+        print("Creating charts...")
+        for label, count in tqdm(self.detection_count.items()):
             if label != "total":
                 rgb = list(self.box_colors[label])
                 rgb.reverse()
@@ -162,10 +162,6 @@ class Detector:
     def to_video(self, saved_to, video_name):
         creator = VideoCreator(saved_to, video_name)
         creator.create_video()
-
-def get_images(videofile):
-
-    pass
 
 def main(images_dir,
          output_name,
