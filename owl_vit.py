@@ -19,7 +19,13 @@ class Detector:
     Colors in (B,G,R) format
     """
 
-    def __init__(self):
+    def __init__(self,
+                 imgs_dir="images",
+                 texts=["person"],
+                 colors=[(0,0,255)],
+                 thresholds=[0.1],
+                 box_thickness=2,
+                 save_model=True):
         if torch.cuda.is_available():
             self.device = torch.device("cuda")
         else:
@@ -41,8 +47,13 @@ class Detector:
                 self.processor.save_pretrained(model_dir)
                 self.model.save_pretrained(model_dir)
         else:
-            self.processor = OwlViTProcessor.from_pretrained("google/owlvit-base-patch32")
-            self.model = OwlViTForObjectDetection.from_pretrained("google/owlvit-base-patch32")
+            if model_exist:
+                self.processor = OwlViTProcessor.from_pretrained(model_dir)
+                self.model = OwlViTForObjectDetection.from_pretrained(model_dir)
+            else:
+                self.processor = OwlViTProcessor.from_pretrained("google/owlvit-base-patch32")
+                self.model = OwlViTForObjectDetection.from_pretrained("google/owlvit-base-patch32")
+
         self.texts = texts
         self.box_colors = {texts[i]:colors[i] for i in range(len(texts))}
         self.object_threshold = {texts[i]:thresholds[i] for i in range(len(texts))}
@@ -164,9 +175,9 @@ def main(images_dir,
          image_end,
          texts,
          colors,
-        thresholds,
-        box_thickness,
-        save_model):
+         thresholds,
+         box_thickness,
+         save_model):
 
     if process_vid:
         if video_filename is not None:
@@ -175,8 +186,8 @@ def main(images_dir,
         else:
             raise Exception("Please provide a valid video filename.")
 
-    detector = Detector(images_dir, )
-    print("Detector for {} with threshold {}".format(detector.texts,list(detector.object_threshold.values())))
+    detector = Detector(images_dir, texts, colors, thresholds, box_thickness, save_model)
+    print("Detector for {} with thresholds {}".format(detector.texts,list(detector.object_threshold.values())))
     if not os.path.exists(output_name):
         os.makedirs(output_name)
     detector.detect_folder(save_to=output_name)
@@ -190,7 +201,7 @@ if __name__ == "__main__":
     parser.add_argument('--save_to', type=str, required=True,
                         help='the directory in which to save the processed images')
     parser.add_argument('--process_video', action='store_true', default=False,
-                        help="Wether to get images from a video or not.")
+                        help="Wether to get images from a video or not (default: False).")
     parser.add_argument('--video_filename', type=str, default=None,
                         help="Name of video file to process (default: None).")
     parser.add_argument('--image_start', type=int, default=0,
@@ -240,9 +251,9 @@ if __name__ == "__main__":
                                                                         0.015,
                                                                         0.01,
                                                                         0.045,
-                                                                        0.072]
+                                                                        0.072],
                         help='A list of thresholds between 0 and 1 (default: 14 low thresholds for the texts).')
-    parser.add_argument('--box_thickness', type=int, default=2
+    parser.add_argument('--box_thickness', type=int, default=2,
                         help='The thickness of the bounding boxes to draw (default: 2).')
     parser.add_argument('--save_model', action='store_true', default=False,
                         help='Whether to save the pretrained model locally or not (default: False).')
@@ -258,7 +269,7 @@ if __name__ == "__main__":
          texts=args.texts,
          colors=args.colors,
          thresholds=args.thresholds,
-         box_thickness=args.thickness,
-         save_model=args.save_model))
+         box_thickness=args.box_thickness,
+         save_model=args.save_model)
 
     
