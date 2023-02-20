@@ -22,7 +22,6 @@ class Detector:
     def __init__(self,
                  imgs_dir="images",
                  texts=["person"],
-                 colors=[(0,0,255)],
                  thresholds=[0.1],
                  box_thickness=2,
                  save_model=True):
@@ -53,7 +52,20 @@ class Detector:
             else:
                 self.processor = OwlViTProcessor.from_pretrained("google/owlvit-base-patch32")
                 self.model = OwlViTForObjectDetection.from_pretrained("google/owlvit-base-patch32")
-
+        colors = [(0,0,255),
+                  (255,0,0),
+                  (0,204,255),
+                  (0,127,255),
+                  (0,255,0),
+                  (210,242,31),
+                  (138,221,242),
+                  (200,152,234),
+                  (5,35,84),
+                  (224,26,168),
+                  (193,229,87),
+                  (48,156,168),
+                  (45,136,255),
+                  (155,155,155)]
         self.texts = texts
         self.box_colors = {texts[i]:colors[i] for i in range(len(texts))}
         self.object_threshold = {texts[i]:thresholds[i] for i in range(len(texts))}
@@ -170,7 +182,6 @@ def main(images_dir,
          image_start,
          image_end,
          texts,
-         colors,
          thresholds,
          box_thickness,
          save_model):
@@ -182,7 +193,7 @@ def main(images_dir,
         else:
             raise Exception("Please provide a valid video filename.")
 
-    detector = Detector(images_dir, texts, colors, thresholds, box_thickness, save_model)
+    detector = Detector(images_dir, texts, thresholds, box_thickness, save_model)
     print("Detector for {} with thresholds {}".format(detector.texts,list(detector.object_threshold.values())))
     if not os.path.exists(output_name):
         os.makedirs(output_name)
@@ -219,22 +230,6 @@ if __name__ == "__main__":
                                                                  "jacket",
                                                                  "train seat"],
                         help='A list of texts to detect in the images (default: 14 random texts).')
-                        # TODO delete and hardcode colors
-    parser.add_argument('--colors', nargs='+', default=[(0,0,255),
-                                                        (255,0,0),
-                                                        (0,204,255),
-                                                        (0,127,255),
-                                                        (0,255,0),
-                                                        (210,242,31),
-                                                        (138,221,242),
-                                                        (200,152,234),
-                                                        (5,35,84),
-                                                        (224,26,168),
-                                                        (193,229,87),
-                                                        (48,156,168),
-                                                        (45,136,255),
-                                                        (155,155,155)],
-                        help='A list of (b,g,r) colors for the bounding boxes (default: 14 different colors).')
     parser.add_argument('--thresholds', nargs='+', type=float, default=[0.08,
                                                                         0.015,
                                                                         0.025,
@@ -264,7 +259,6 @@ if __name__ == "__main__":
          image_start=args.image_start,
          image_end=args.image_end,
          texts=args.texts,
-         colors=args.colors,
          thresholds=args.thresholds,
          box_thickness=args.box_thickness,
          save_model=args.save_model)
