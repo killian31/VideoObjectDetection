@@ -15,7 +15,7 @@ class ImageCreator:
         self.imgs_dir = imgs_dir
         self.image_start = image_start
         self.image_end = image_end
-        if not os.path.exists(imgs_dir):                                           
+        if not os.path.exists(imgs_dir):
             os.makedirs(imgs_dir)
 
     def get_images(self):
@@ -28,8 +28,8 @@ class ImageCreator:
             self.image_end = total_frames
         zfill_max = len(str(total_frames))
         ok_count = 0
+        print("Writing images...")
         pbar = tqdm(total=total_frames)
-
         while success:
             if count >= self.image_start and count <= self.image_end:
                 cv2.imwrite(f"{self.imgs_dir}/frame_{str(ok_count).zfill(zfill_max)}.jpg", image) 
