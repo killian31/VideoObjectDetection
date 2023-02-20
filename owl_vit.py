@@ -262,7 +262,7 @@ if __name__ == "__main__":
 
     main(images_dir=args.imgs_dir,
          output_name=args.save_to,
-         fps=args.fps
+         fps=args.fps,
          process_vid=args.process_video,
          video_filename=args.video_filename,
          image_start=args.image_start,
