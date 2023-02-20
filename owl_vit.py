@@ -223,6 +223,7 @@ if __name__ == "__main__":
                                                                  "jacket",
                                                                  "train seat"],
                         help='A list of texts to detect in the images (default: 14 random texts).')
+                        # TODO delete and hardcode colors
     parser.add_argument('--colors', nargs='+', default=[(0,0,255),
                                                         (255,0,0),
                                                         (0,204,255),
