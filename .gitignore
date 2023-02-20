@@ -1,0 +1,13 @@
+Final/*
+Final_plots/*
+OwlViT_ZeroShotDetection.pdf
+*.avi
+__pycache__/*
+detected_videos/*
+frames/*
+test/*
+venv/*
+FinalComplete.avi
+FinalComplete/*
+FinalComplete_plots/*
+all_frames/*
