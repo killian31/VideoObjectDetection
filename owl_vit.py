@@ -191,7 +191,7 @@ def main(images_dir,
         if video_filename is not None:
             image_maker = ImageCreator(video_filename, images_dir, image_start, image_end)
             image_maker.get_images()
-            cap = VideoCapture(video_filename)
+            cap = cv2.VideoCapture(video_filename)
             fps = cap.get(cv2.CAP_PROP_FPS)
         else:
             raise Exception("Please provide a valid video filename.")
