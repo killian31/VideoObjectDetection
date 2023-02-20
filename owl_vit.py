@@ -171,12 +171,13 @@ class Detector:
                 plt.title("Total")
                 plt.savefig(f"{directory}/{save_to}_total_plot.jpg")
 
-    def to_video(self, saved_to, video_name):
+    def to_video(self, saved_to, video_name, fps):
         creator = VideoCreator(saved_to, video_name)
-        creator.create_video()
+        creator.create_video(fps=fps)
 
 def main(images_dir,
          output_name,
+         fps,
          process_vid,
          video_filename,
          image_start,
@@ -190,15 +191,20 @@ def main(images_dir,
         if video_filename is not None:
             image_maker = ImageCreator(video_filename, images_dir, image_start, image_end)
             image_maker.get_images()
+            cap = VideoCapture(video_filename)
+            fps = cap.get(cv2.CAP_PROP_FPS)
         else:
             raise Exception("Please provide a valid video filename.")
+    else:
+        if fps is None:
+            fps=20
 
     detector = Detector(images_dir, texts, thresholds, box_thickness, save_model)
     print("Detector for {} with thresholds {}".format(detector.texts,list(detector.object_threshold.values())))
     if not os.path.exists(output_name):
         os.makedirs(output_name)
     detector.detect_folder(save_to=output_name)
-    detector.to_video(output_name, output_name + ".avi")
+    detector.to_video(output_name, output_name + ".avi", fps)
     detector.plot_data(output_name)
 
 if __name__ == "__main__":
@@ -207,6 +213,8 @@ if __name__ == "__main__":
                         help='The directory containing the images.')
     parser.add_argument('--save_to', type=str, required=True,
                         help='the directory in which to save the processed images')
+    parser.add_argument('--fps', type=int, default=None,
+                        help='Number of frames per second for the output video (default: None, determined automatically if process_video).')
     parser.add_argument('--process_video', action='store_true', default=False,
                         help="Wether to get images from a video or not (default: False).")
     parser.add_argument('--video_filename', type=str, default=None,
@@ -254,6 +262,7 @@ if __name__ == "__main__":
 
     main(images_dir=args.imgs_dir,
          output_name=args.save_to,
+         fps=args.fps
          process_vid=args.process_video,
          video_filename=args.video_filename,
          image_start=args.image_start,

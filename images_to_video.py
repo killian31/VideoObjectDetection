@@ -22,9 +22,9 @@ class VideoCreator:
         return size
 
 
-    def create_video(self):
+    def create_video(self, fps=20):
         size = self.preprocess_images()
-        out = cv2.VideoWriter(self.video_filename, cv2.VideoWriter_fourcc(*"MJPG"), 20, size)
+        out = cv2.VideoWriter(self.video_filename, cv2.VideoWriter_fourcc(*"MJPG"), fps, size)
         print("Recording video...")
         for i in tqdm(range(len(self.img_array))):
             out.write(self.img_array[i])
