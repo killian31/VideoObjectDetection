@@ -174,7 +174,7 @@ class Detector:
                 plt.ylabel('Total detected')
                 plt.xlabel('Frame id')
                 plt.title("Total")
-                plt.savefig(f"{directory}/{save_to}_total_plot.jpg")
+                plt.savefig(f"{directory}/{save_to}_total_plot.png")
 
     def to_video(self, saved_to, video_name, fps):
         creator = VideoCreator(saved_to, video_name)
