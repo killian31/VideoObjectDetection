@@ -100,7 +100,12 @@ class Detector:
         dic_count = {k:0 for k in self.texts}
 
         for box, score, label in zip(boxes, scores, labels):
-            box = [int(i*image.shape[0]) for i in box.tolist()] #works because square imgs
+            # box = [int(i*image.shape[0]) for i in box.tolist()] #works because square imgs
+            box = box.tolist()
+            box[0] *= image.shape[1]
+            box[1] *= image.shape[0]
+            box[2] *= image.shape[1]
+            box[3] *= image.shape[0]
             if score >= self.object_threshold[self.texts[label]]:
                 detected += 1
                 dic_count[self.texts[label]] += 1
