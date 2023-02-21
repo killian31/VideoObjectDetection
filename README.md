@@ -42,8 +42,6 @@ Options:
                         Frame to end with (default: last (0).
   --texts TEXTS [TEXTS ...]
                         A list of texts to detect in the images (default: 14 random texts).
-  --colors COLORS [COLORS ...]
-                        A list of (b,g,r) colors for the bounding boxes (default: 14 different colors).
   --thresholds THRESHOLDS [THRESHOLDS ...]
                         A list of thresholds between 0 and 1 (default: 14 low thresholds for the texts).
   --box_thickness BOX_THICKNESS
