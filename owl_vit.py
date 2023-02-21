@@ -167,7 +167,7 @@ class Detector:
                 plt.ylabel(f'Number of {label}s detected')
                 plt.xlabel('Frame id')
                 plt.title(label)
-                plt.savefig(f"{directory}/{save_to}_{label}_plot.jpg")
+                plt.savefig(f"{directory}/{save_to}_{label}_plot.png")
             else:
                 plt.figure(figsize=(16,9))
                 plt.plot(count)
