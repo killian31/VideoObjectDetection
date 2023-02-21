@@ -19,7 +19,7 @@ Run the following commands:
 ```
 git clone https://github.com/killian31/ObjectsDetection.git
 cd ObjectsDetection
-pip install -r requirements.txt
+pip install -r requirements.txt --upgrade
 ```
 
 ## Usage
