@@ -56,7 +56,5 @@ Run `python3 owl_vit.py -h` to display the help message above.
 ## Example
 
 ```
-python3 owl_vit.py --imgs_dir frames --save_to detected_example 
-                   --process_video --video_filename data/video.mp4 
-                   --texts person ball --thresholds 0.08 0.12 --save_model
+python3 owl_vit.py --imgs_dir frames --save_to detected_example --process_video --video_filename data/video.mp4 --texts person ball --thresholds 0.08 0.12 --save_model
 ```
