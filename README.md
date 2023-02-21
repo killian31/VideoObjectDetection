@@ -55,5 +55,7 @@ Options:
 ## Example
 
 ```
-python3 owl_vit.py --imgs_dir path/to/store/images --save_to output_name --process_video --video_filename MyVideo.avi --texts person ball shoe --thresholds 0.07 0.15 0.03 --save_model
+python3 owl_vit.py --imgs_dir frames --save_to detected_example 
+                   --process_video --video_filename data/video.mp4 
+                   --texts person ball --thresholds 0.08 0.12 --save_model
 ```
