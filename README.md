@@ -2,7 +2,7 @@
 
 This project implements the Owl-ViT model for zero-shot object detection in videos (or several images).
 
-![](data/video.mp4)
+data/video.mp4
 
 ## Contents
 
