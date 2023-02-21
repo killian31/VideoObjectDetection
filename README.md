@@ -2,6 +2,8 @@
 
 This project implements the Owl-ViT model for zero-shot object detection in videos (or several images).
 
+![Football video](data/example.gif)
+
 ## Contents
 
 Table of contents:
@@ -40,8 +42,6 @@ Options:
                         Frame to end with (default: last (0).
   --texts TEXTS [TEXTS ...]
                         A list of texts to detect in the images (default: 14 random texts).
-  --colors COLORS [COLORS ...]
-                        A list of (b,g,r) colors for the bounding boxes (default: 14 different colors).
   --thresholds THRESHOLDS [THRESHOLDS ...]
                         A list of thresholds between 0 and 1 (default: 14 low thresholds for the texts).
   --box_thickness BOX_THICKNESS
@@ -53,5 +53,7 @@ Options:
 ## Example
 
 ```
-python3 owl_vit.py --imgs_dir path/to/store/images --save_to output_name --process_video --video_filename MyVideo.avi --texts person ball shoe --thresholds 0.07 0.15 0.03 --save_model
+python3 owl_vit.py --imgs_dir frames --save_to detected_example 
+                   --process_video --video_filename data/video.mp4 
+                   --texts person ball --thresholds 0.08 0.12 --save_model
 ```
