@@ -51,7 +51,7 @@ Options:
 
 ```
 
-Run `python3 owl_vit.py -h` to display the help message above.
+Run `python3 owl_vit.py -h` to display the help above message.
 
 ## Example
 
