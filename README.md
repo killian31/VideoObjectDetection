@@ -3,8 +3,10 @@
 This project implements the Owl-ViT model for zero-shot object detection in videos (or several images).
 
 ![Football video](data/example.gif)
+Detection using the prompts "person" and "ball".
 
 ![Balloons video](data/balloon.gif)
+Detection using the prompts "person" and "balloon".
 ## Contents
 
 Table of contents:
