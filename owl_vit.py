@@ -250,7 +250,7 @@ if __name__ == "__main__":
         "--owl_model",
         type=str,
         default="Owl-ViT",
-        choices=["Owl-ViT"]#, "Owlv2"], put back when owlv2 from HF is fixed.
+        choices=["Owl-ViT"],  # , "Owlv2"], put back when owlv2 from HF is fixed.
         help="Which version of Owl model to use",
     )
     parser.add_argument(
