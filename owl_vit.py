@@ -1,10 +1,8 @@
 import argparse
 import os
-import random
 
 import cv2
 import matplotlib.pyplot as plt
-import requests
 import torch
 from PIL import Image
 from tqdm import tqdm

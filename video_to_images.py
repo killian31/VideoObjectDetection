@@ -1,6 +1,8 @@
+import os
+
 import cv2
 from tqdm import tqdm
-import os
+
 
 class ImageCreator:
     def __init__(self, filename, imgs_dir, image_start=0, image_end=0):
@@ -23,7 +25,6 @@ class ImageCreator:
         total_frames = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
         success, image = vid.read()
         count = 0
-        image_start = self.image_start
         if self.image_end == 0:
             self.image_end = total_frames
         zfill_max = len(str(total_frames))
@@ -32,7 +33,9 @@ class ImageCreator:
         pbar = tqdm(total=total_frames)
         while success:
             if count >= self.image_start and count <= self.image_end:
-                cv2.imwrite(f"{self.imgs_dir}/frame_{str(ok_count).zfill(zfill_max)}.jpg", image) 
+                cv2.imwrite(
+                    f"{self.imgs_dir}/frame_{str(ok_count).zfill(zfill_max)}.jpg", image
+                )
                 ok_count += 1
             success, image = vid.read()
             pbar.update(1)
@@ -40,6 +43,9 @@ class ImageCreator:
         pbar.close()
         print("Wrote {} image files.".format(ok_count))
 
+
 if __name__ == "__main__":
-    vid_to_im = ImageCreator("Video_embarquement_1.avi", "testF", image_start=400, image_end=2743)
+    vid_to_im = ImageCreator(
+        "Video_embarquement_1.avi", "testF", image_start=400, image_end=2743
+    )
     vid_to_im.get_images()

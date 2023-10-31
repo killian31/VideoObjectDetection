@@ -1,7 +1,8 @@
-import cv2
-import numpy as np
 import os
+
+import cv2
 from tqdm import tqdm
+
 
 class VideoCreator:
     def __init__(self, imgs_dir, vid_name):
@@ -21,15 +22,17 @@ class VideoCreator:
 
         return size
 
-
     def create_video(self, fps=20):
         size = self.preprocess_images()
-        out = cv2.VideoWriter(self.video_filename, cv2.VideoWriter_fourcc(*"MJPG"), fps, size)
+        out = cv2.VideoWriter(
+            self.video_filename, cv2.VideoWriter_fourcc(*"MJPG"), fps, size
+        )
         print("Recording video...")
         for i in tqdm(range(len(self.img_array))):
             out.write(self.img_array[i])
         out.release()
         print("Done.")
+
 
 if __name__ == "__main__":
     creator = VideoCreator("/data3/airbus/onboard_vid/person0.05", "test_vid.avi")
